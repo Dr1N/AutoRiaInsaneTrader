@@ -5,11 +5,11 @@ namespace AutoRiaInsaneTrader
 {
     internal class RiaBot : IRiaBot
     {
-        private readonly RiaConfig riaConfig;
+        private readonly IConfig config;
 
-        public RiaBot(RiaConfig riaConfig)
+        public RiaBot(IConfig config)
         {
-            this.riaConfig = riaConfig ?? throw new ArgumentNullException(nameof(riaConfig));
+            this.config = config ?? throw new ArgumentNullException(nameof(config));
         }
 
         public void Run()
