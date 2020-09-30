@@ -1,7 +1,9 @@
-﻿namespace AutoRiaInsaneTrader.Contracts
+﻿using System.Threading.Tasks;
+
+namespace AutoRiaInsaneTrader.Contracts
 {
     internal interface IRiaBot
     {
-        void Run();
+        Task Run();
     }
 }

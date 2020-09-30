@@ -22,7 +22,7 @@ namespace AutoRiaInsaneTrader
 
                 var bot = new RiaBot(config);
 
-                bot.Run();
+                _ = bot.Run();
 
                 Console.ReadKey(true);
             }
