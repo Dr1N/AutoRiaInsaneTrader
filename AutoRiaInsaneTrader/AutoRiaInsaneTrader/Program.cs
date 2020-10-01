@@ -18,11 +18,7 @@ namespace AutoRiaInsaneTrader
                     .AddJsonFile(configurationFile, true, true)
                     .Build();
 
-                var config = new RiaConfig(configuration);
-
-                var bot = new RiaBot(config);
-
-                _ = bot.Run();
+                _ = new RiaBot(new RiaConfig(configuration)).Run();
 
                 Console.ReadKey(true);
             }

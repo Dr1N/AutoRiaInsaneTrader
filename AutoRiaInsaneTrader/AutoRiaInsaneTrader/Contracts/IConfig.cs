@@ -1,9 +1,17 @@
 ﻿namespace AutoRiaInsaneTrader.Contracts
 {
-    interface IConfig
+    internal interface IConfig
     {
         public string ConnectionString { get; }
 
         public string RuCaptchaApiKey { get; }
+
+        public string PspId { get; }
+
+        public string Jwt { get; }
+
+        public string PhpLoginSessId { get; }
+
+        public string PhpSessId { get; }
     }
 }
