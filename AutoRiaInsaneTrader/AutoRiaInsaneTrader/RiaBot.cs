@@ -13,10 +13,12 @@ namespace AutoRiaInsaneTrader
         private const string autoRiaCabinet = "https://auto.ria.com/cabinet/";
 
         private readonly IConfig config;
+        private readonly IRiaParser parser;
 
         public RiaBot(IConfig config)
         {
             this.config = config ?? throw new ArgumentNullException(nameof(config));
+            this.parser = new RiaParser(); // TODO: inject
         }
 
         public async Task Run()
