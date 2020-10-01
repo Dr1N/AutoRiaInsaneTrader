@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace AutoRiaInsaneTrader.Domain
 {
-    internal class RiaListAd
+    internal class RiaListAd : IEquatable<RiaMessage>
     {
         public string Url { get; set; }
 
@@ -27,5 +28,10 @@ namespace AutoRiaInsaneTrader.Domain
         public string City { get; set; }
 
         public DateTime Parsed { get; set; }
+
+        public bool Equals([AllowNull] RiaMessage other)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

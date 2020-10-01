@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using AngleSharp;
@@ -14,11 +13,13 @@ namespace AutoRiaInsaneTrader
 
         private readonly IConfig config;
         private readonly IRiaParser parser;
+        private readonly ICookieBuilder cookieBuilder;
 
         public RiaBot(IConfig config)
         {
             this.config = config ?? throw new ArgumentNullException(nameof(config));
             this.parser = new RiaParser(); // TODO: inject
+            this.cookieBuilder = new RiaCookieBuilder(config); // TODO: inject
         }
 
         public async Task Run()
@@ -37,7 +38,7 @@ namespace AutoRiaInsaneTrader
         {
             using var http = new HttpClient();
             using var request = new HttpRequestMessage(HttpMethod.Get, autoRiaCabinet);
-            request.Headers.Add("Cookie", Cookie());
+            request.Headers.Add("Cookie", cookieBuilder.AuthCookie());
 
             using var response = await http.SendAsync(request).ConfigureAwait(false);
 
@@ -59,23 +60,9 @@ namespace AutoRiaInsaneTrader
         {
             var browsingContext = BrowsingContext.New(Configuration.Default);
             var document = await browsingContext.OpenAsync(req => req.Content(html)).ConfigureAwait(false);
-            const string selector = "h1.bold";
-            var title = document.QuerySelector(selector);
+            var title = document.QuerySelector("h1.bold");
 
             return title != null;
-        }
-
-        private string Cookie()
-        {
-            var list = new List<string>
-            {
-                $"PSP_ID={config.PspId}",
-                $"PHPLOGINSESSID={config.PhpLoginSessId}",
-                $"PHPSESSID={config.PhpLoginSessId}",
-                $"jwt={config.Jwt}"
-            };
-
-            return string.Join("; ", list);
         }
     }
 }
