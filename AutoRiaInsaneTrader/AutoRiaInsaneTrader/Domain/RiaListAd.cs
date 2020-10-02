@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace AutoRiaInsaneTrader.Domain
 {
-    internal class RiaListAd : IEquatable<RiaMessage>
+    internal class RiaListAd : IEquatable<RiaListAd>
     {
         public string Url { get; set; }
 
@@ -29,7 +29,7 @@ namespace AutoRiaInsaneTrader.Domain
 
         public DateTime Parsed { get; set; }
 
-        public bool Equals([AllowNull] RiaMessage other)
+        public bool Equals([AllowNull] RiaListAd other)
         {
             throw new NotImplementedException();
         }
